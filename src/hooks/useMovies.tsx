@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { Movie } from '../types';
+import { API_KEY } from '../api/api';
 
 interface UseMoviesReturn {
   movies: Movie[];
@@ -17,7 +18,7 @@ const useMovies = (): UseMoviesReturn => {
     setLoading(true);
     setError('');
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=8f7360a908b8f8e47f6c8c039906df03&language=pl-PL`
+      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pl-PL`
     )
       .then(response => {
         if (!response.ok) {
