@@ -1,11 +1,5 @@
 import { useState, useCallback } from 'react';
-
-export interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string;
-}
+import { Movie } from '../types';
 
 interface UseMoviesReturn {
   movies: Movie[];
@@ -27,7 +21,6 @@ const useMovies = (): UseMoviesReturn => {
     )
       .then(response => {
         if (!response.ok) {
-          // Jeśli status nie jest OK, wyrzuć błąd
           throw new Error(`Błąd HTTP: ${response.status}`);
         }
         return response.json();
