@@ -54,7 +54,15 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           p: 0,
         }}
       >
-        <Button size='small' onClick={handleMore}>
+        <Button
+          sx={{
+            color: 'rgb(255, 255, 255)',
+            borderColor: 'rgb(255, 255, 255)',
+            '&:hover': { color: 'rgb(0, 255, 229)' },
+          }}
+          size='small'
+          onClick={handleMore}
+        >
           Więcej
         </Button>
       </CardActions>
