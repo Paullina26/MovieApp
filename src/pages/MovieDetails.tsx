@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loading from '../components/status/Loading';

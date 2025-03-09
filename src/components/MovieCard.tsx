@@ -7,7 +7,6 @@ import {
   Button,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-
 import { Movie } from '../types';
 
 interface MovieCardProps {
