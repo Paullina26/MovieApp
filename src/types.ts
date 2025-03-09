@@ -30,3 +30,10 @@ export interface MovieDetails {
   backdrop_path: string;
   production_companies: ProductionCompany[];
 }
+
+export interface FilterValues {
+  query: string;
+  genre: string;
+  minVoteAverage: number;
+  sortBy: string;
+}

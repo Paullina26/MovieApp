@@ -1,12 +1,13 @@
 import { useState, useCallback } from 'react';
 import { Movie } from '../types';
-import { API_KEY } from '../api/api';
+import { ENDPOINTS } from '../api/api';
+import { FilterValues } from '../types';
 
 interface UseMoviesReturn {
   movies: Movie[];
   loading: boolean;
   error: string;
-  fetchMovies: () => void;
+  fetchMovies: (filters?: FilterValues) => void;
 }
 
 const useMovies = (): UseMoviesReturn => {
@@ -14,12 +15,23 @@ const useMovies = (): UseMoviesReturn => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  const fetchMovies = useCallback(() => {
+  const fetchMovies = useCallback((filters?: FilterValues) => {
     setLoading(true);
     setError('');
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pl-PL`
-    )
+    let url = '';
+
+    if (filters) {
+      const { query, genre, minVoteAverage, sortBy } = filters;
+      if (query && query.trim() !== '') {
+        url = ENDPOINTS.search(query);
+      } else {
+        url = ENDPOINTS.discover(sortBy, genre, minVoteAverage);
+      }
+    } else {
+      url = ENDPOINTS.popular;
+    }
+
+    fetch(url)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Błąd HTTP: ${response.status}`);
@@ -27,12 +39,10 @@ const useMovies = (): UseMoviesReturn => {
         return response.json();
       })
       .then(data => {
-        console.log('Pobrane filmy:', data.results);
         setMovies(data.results);
         setLoading(false);
       })
       .catch(err => {
-        console.error('Błąd pobierania:', err);
         setError(err.message);
         setLoading(false);
       });
