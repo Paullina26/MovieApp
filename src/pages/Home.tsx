@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Container, Grid2, Box } from '@mui/material';
+import { Container, Grid2, Box, Typography } from '@mui/material';
 import MovieCard from '../components/MovieCard';
 import useMovies from '../hooks/useMovies';
 import Loading from '../components/status/Loading';
@@ -34,9 +34,12 @@ const Home: React.FC = () => {
           width: '100vw',
           height: '70px',
           boxShadow: '0px 10px 30px 20px rgba(0,0,0,0.75)',
+          textAlign: 'center',
         }}
       >
-        <p>Wyszukiwarka Filmów</p>
+        <Typography variant='h4' sx={{ mt: 2 }}>
+          Filmy
+        </Typography>
         <MovieFilter
           onFilterChange={(newFilters: FilterValues) => setFilters(newFilters)}
         />

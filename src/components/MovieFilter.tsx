@@ -48,7 +48,7 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <>
+    <Box>
       <Button
         variant='outlined'
         onClick={() => setOpen(true)}
@@ -58,7 +58,7 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
           m: 2,
           position: 'fixed',
           top: 2,
-          right: 16,
+          right: 0,
           zIndex: 2,
         }}
       >
@@ -78,18 +78,14 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
             }}
           >
             <TextField
-              inputProps={{ sx: { fontSize: '0.8rem' } }}
               label='Nazwa filmu'
               variant='outlined'
               value={query}
               onChange={e => setQuery(e.target.value)}
             />
             <FormControl variant='outlined'>
-              <InputLabel id='genre-label' sx={{ fontSize: '0.8rem' }}>
-                Kategoria
-              </InputLabel>
+              <InputLabel id='genre-label'>Kategoria</InputLabel>
               <Select
-                sx={{ fontSize: '0.8rem' }}
                 labelId='genre-label'
                 label='Kategoria'
                 value={genre}
@@ -106,7 +102,6 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
               </Select>
             </FormControl>
             <TextField
-              inputProps={{ sx: { fontSize: '0.8rem' } }}
               label='Minimalna ocena'
               variant='outlined'
               type='number'
@@ -114,11 +109,8 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
               onChange={e => setMinVoteAverage(Number(e.target.value))}
             />
             <FormControl variant='outlined'>
-              <InputLabel id='sort-label' sx={{ fontSize: '0.8rem' }}>
-                Sortowanie
-              </InputLabel>
+              <InputLabel id='sort-label'>Sortowanie</InputLabel>
               <Select
-                sx={{ fontSize: '0.8rem' }}
                 labelId='sort-label'
                 label='Sortowanie'
                 value={sortBy}
@@ -142,10 +134,9 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
             </FormControl>
             <Button
               sx={{
-                backgroundColor: 'rgba(0, 247, 255, 0.5)',
+                backgroundColor: 'rgb(0, 150, 156)',
                 color: 'rgb(255, 255, 255)',
-                borderColor: 'rgb(255, 255, 255)',
-                '&:hover': { backgroundColor: 'rgba(0, 255, 229, 0.7)' },
+                '&:hover': { backgroundColor: 'rgb(0, 195, 202)' },
               }}
               variant='contained'
               type='submit'
@@ -155,7 +146,7 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
           </Box>
         </Box>
       </Drawer>
-    </>
+    </Box>
   );
 };
 

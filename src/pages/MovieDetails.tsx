@@ -86,6 +86,9 @@ const MovieDetails: React.FC = () => {
               borderRadius: 2,
               boxShadow: 3,
               mr: 2,
+              '@media (max-width:640px)': {
+                display: 'none',
+              },
             }}
           />
           <Box>
@@ -119,8 +122,8 @@ const MovieDetails: React.FC = () => {
       <Box
         sx={{
           position: 'absolute',
-          top: 15,
-          right: 35,
+          top: 5,
+          right: 30,
           zIndex: 2,
         }}
       >
