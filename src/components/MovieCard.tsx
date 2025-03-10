@@ -21,12 +21,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   };
 
   return (
-    <Card
-      sx={{ width: 240, height: 480, margin: 'auto', position: 'relative' }}
-    >
+    <Card className='w-[240px] h-[480px] m-auto relative'>
       <CardMedia
         component='img'
-        sx={{ height: 360, objectFit: 'cover' }}
+        className='h-[360px]'
         image={
           movie.poster_path
             ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
@@ -34,8 +32,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
         }
         alt={movie.title}
       />
-      <CardContent sx={{ mt: 0, mb: 0, pb: 0, pt: 1 }}>
-        <Typography sx={{ mb: 0, pb: 0 }} gutterBottom component='div'>
+      <CardContent className='mt-0 mb-0 pb-0 pt-1'>
+        <Typography className='mb-0 pb-0' component='div' gutterBottom>
           {movie.title}
         </Typography>
         <Typography variant='body2' color='text.secondary'>
@@ -45,19 +43,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           Ocena: {movie.vote_average}
         </Typography>
       </CardContent>
-      <CardActions
-        sx={{
-          position: 'absolute',
-          bottom: 8,
-          right: 8,
-          p: 0,
-        }}
-      >
+      <CardActions className='absolute bottom-[8px] right-[8px] p-0'>
         <Button
           sx={{
-            color: 'rgb(255, 255, 255)',
-            borderColor: 'rgb(255, 255, 255)',
-            '&:hover': { color: 'rgb(0, 255, 229)' },
+            '&:hover': { color: 'rgb(0,255,229)' },
           }}
           size='small'
           onClick={handleMore}

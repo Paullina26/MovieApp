@@ -29,7 +29,7 @@ const useMovies = (): UseMoviesReturn => {
   }, [page]);
 
   const fetchMovies = useCallback(
-    (filters?: FilterValues & { page?: number }) => {
+    async (filters?: FilterValues & { page?: number }) => {
       setLoading(true);
       setError('');
       const currentPage = filters?.page || 1;
@@ -48,26 +48,27 @@ const useMovies = (): UseMoviesReturn => {
         url = ENDPOINTS.popular + `&page=${currentPage}`;
       }
 
-      fetch(url)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`Błąd HTTP: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          if (currentPage === 1) {
-            setMovies(data.results);
-          } else {
-            setMovies(prev => [...prev, ...data.results]);
-          }
-          setPage(currentPage);
-          setLoading(false);
-        })
-        .catch(err => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`Błąd HTTP: ${response.status}`);
+        }
+        const data = await response.json();
+        if (currentPage === 1) {
+          setMovies(data.results);
+        } else {
+          setMovies(prev => [...prev, ...data.results]);
+        }
+        setPage(currentPage);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
           setError(err.message);
-          setLoading(false);
-        });
+        } else {
+          setError('Nieznany błąd');
+        }
+      } finally {
+        setLoading(false);
+      }
     },
     [setLoading, setError]
   );

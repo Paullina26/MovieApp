@@ -71,7 +71,7 @@ const Home: React.FC = () => {
     <>
       <Header onFilterChange={handleFilterChange} />
       <Container className='mt-25 mb-5'>
-        <Grid2 container spacing={3} sx={{ justifyContent: 'center' }}>
+        <Grid2 container spacing={3} className='justify-center'>
           {movies.map((movie, index) => (
             <Grid2 key={`${movie.id}-${index}`}>
               <MovieCard movie={movie} />

@@ -28,22 +28,28 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
   const { setLoading, setError } = useStatus();
 
   useEffect(() => {
-    setLoading(true);
-    fetch(ENDPOINTS.genreList)
-      .then(response => {
+    const fetchGenres = async () => {
+      try {
+        setLoading(true);
+        setError('');
+        const response = await fetch(ENDPOINTS.genreList);
         if (!response.ok) {
           throw new Error(`Błąd HTTP: ${response.status}`);
         }
-        return response.json();
-      })
-      .then(data => {
+        const data = await response.json();
         setGenres(data.genres);
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError('Nieznany błąd');
+        }
+      } finally {
         setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchGenres();
   }, [setLoading, setError]);
 
   const handleSubmit = (e: React.FormEvent) => {

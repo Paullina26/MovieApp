@@ -38,71 +38,45 @@ const MovieDetails: React.FC = () => {
   }, [id, setLoading, setError]);
 
   return (
-    <Container sx={{ mt: 2, mb: 4, position: 'relative' }}>
+    <Container className='mt-2 mb-4 relative'>
       <Box
+        className='relative w-full overflow-hidden mb-2 bg-cover bg-center'
         sx={{
-          position: 'relative',
-          width: '100%',
-          borderRadius: 2,
-          overflow: 'hidden',
-          mb: 2,
+          borderRadius: 3,
           backgroundImage: `url(https://image.tmdb.org/t/p/w780${movie?.backdrop_path})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
         }}
       >
         <Box
+          className='absolute top-0 left-0 w-full h-full '
           sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
           }}
         />
-        <Box
-          sx={{
-            position: 'relative',
-            zIndex: 1,
-            display: 'flex',
-            alignItems: 'flex-start',
-            p: 2,
-            color: 'white',
-          }}
-        >
+        <Box className='relative z-10 flex items-start p-2 text-white'>
           <Box
+            className='w-[200px] rounded shadow-md mr-2 hidden sm:block'
             component='img'
             src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
             alt={movie?.title ?? 'img'}
-            sx={{
-              width: 200,
-              borderRadius: 2,
-              boxShadow: 3,
-              mr: 2,
-              '@media (max-width:640px)': {
-                display: 'none',
-              },
-            }}
           />
           <Box>
-            <Typography sx={{ m: 0, pb: 1 }} variant='h5' gutterBottom>
+            <Typography className='m-0 pb-1' variant='h5' gutterBottom>
               {movie?.title ?? ''}
             </Typography>
-            <Typography sx={{ m: 0, pb: 0 }} variant='subtitle1' gutterBottom>
+            <Typography className='m-0 pb-0' variant='subtitle1' gutterBottom>
               <b>Data premiery:</b> {movie?.release_date ?? ''} |{' '}
               <b>Czas trwania:</b> {movie?.runtime ?? ''} min
             </Typography>
-            <Typography sx={{ m: 0, pb: 0 }} variant='body1' gutterBottom>
+            <Typography className='m-0 pb-0' variant='body1' gutterBottom>
               <b>Gatunki:</b> {movie?.genres.map(g => g.name).join(', ') ?? ''}
             </Typography>
-            <Typography sx={{ m: 0, pb: 1 }} variant='body1' gutterBottom>
+            <Typography className='m-0 pb-1' variant='body1' gutterBottom>
               <b>Ocena:</b> {movie?.vote_average ?? ''}
             </Typography>
-            <Typography sx={{ m: 0, pb: 1 }} variant='body2'>
+            <Typography className='m-0 pb-1' variant='body2'>
               {movie?.overview ?? ' '}
             </Typography>
-            <Typography sx={{ m: 0, pb: 0 }} gutterBottom>
+            <Typography className='m-0 pb-0' gutterBottom>
               <b> Produkcja:</b>
             </Typography>
             <Typography variant='body2' gutterBottom>
@@ -113,14 +87,7 @@ const MovieDetails: React.FC = () => {
           </Box>
         </Box>
       </Box>
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 5,
-          right: 30,
-          zIndex: 2,
-        }}
-      >
+      <Box className='absolute top-[5px] right-[30px] z-20'>
         <Button
           sx={{
             backgroundColor: 'rgba(255, 255, 255, 0.2)',

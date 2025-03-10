@@ -2,14 +2,7 @@ import { Box, CircularProgress } from '@mui/material';
 
 const Loading: React.FC = () => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100%',
-      }}
-    >
+    <Box className='flex justify-center items-center min-h-full'>
       <CircularProgress color='primary' />
     </Box>
   );

@@ -24,7 +24,7 @@ This is a recruitment project – a web application to browse movies using **The
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v14 or above recommended)
-- [npm](https://www.npmjs.com/) (or yarn/pnpm)
+- [npm](https://www.npmjs.com/) (or yarn/pnpm/npm)
 
 ### Installation
 
