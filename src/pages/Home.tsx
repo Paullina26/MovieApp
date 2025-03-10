@@ -1,8 +1,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { Container, Grid2, Box } from '@mui/material';
+import { Container, Grid2 } from '@mui/material';
 import MovieCard from '../components/MovieCard';
 import useMovies from '../hooks/useMovies';
-import MovieFilter from '../components/MovieFilter';
 import { FilterValues } from '../types';
 import Header from '../components/Header';
 import Loading from '../components/status/Loading';
@@ -70,10 +69,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Header />
-      <Box sx={{ mt: '80px' }}>
-        <MovieFilter onFilterChange={handleFilterChange} />
-      </Box>
+      <Header onFilterChange={handleFilterChange} />
       <Container className='mt-25 mb-5'>
         <Grid2 container spacing={3} sx={{ justifyContent: 'center' }}>
           {movies.map((movie, index) => (

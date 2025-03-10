@@ -57,14 +57,14 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
         variant='outlined'
         onClick={() => setOpen(true)}
         startIcon={<FilterListIcon />}
-        sx={{
-          textTransform: 'none',
-          m: 2,
-          position: 'fixed',
-          top: 2,
-          right: 0,
-          zIndex: 2,
-        }}
+        // sx={{
+        //   textTransform: 'none',
+        //   m: 2,
+        //   position: 'fixed',
+        //   top: 2,
+        //   right: 0,
+        //   zIndex: 2,
+        // }}
       >
         Filtry
       </Button>
