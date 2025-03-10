@@ -5,6 +5,7 @@ import useMovies from '../hooks/useMovies';
 import MovieFilter from '../components/MovieFilter';
 import { FilterValues } from '../types';
 import Header from '../components/Header';
+import Loading from '../components/status/Loading';
 
 const defaultFilters: FilterValues = {
   query: '',
@@ -56,11 +57,14 @@ const Home: React.FC = () => {
       rootMargin: '20px',
       threshold: 1.0,
     });
-    if (observerRef.current) {
-      observer.observe(observerRef.current);
+    const currentElement = observerRef.current;
+    if (currentElement) {
+      observer.observe(currentElement);
     }
     return () => {
-      if (observerRef.current) observer.unobserve(observerRef.current);
+      if (currentElement) {
+        observer.unobserve(currentElement);
+      }
     };
   }, [handleObserver]);
 
@@ -78,6 +82,7 @@ const Home: React.FC = () => {
             </Grid2>
           ))}
         </Grid2>
+        {loading && <Loading />}
         <div ref={observerRef} />
       </Container>
     </>
