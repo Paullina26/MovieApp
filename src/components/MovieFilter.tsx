@@ -12,6 +12,7 @@ import {
   Drawer,
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
+import { useStatus } from '../context/StatusContext';
 
 interface MovieFilterProps {
   onFilterChange: (filters: FilterValues) => void;
@@ -24,8 +25,10 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
   const [minVoteAverage, setMinVoteAverage] = useState<number>(0);
   const [sortBy, setSortBy] = useState<string>('popularity.desc');
   const [genres, setGenres] = useState<Genre[]>([]);
+  const { setLoading, setError } = useStatus();
 
   useEffect(() => {
+    setLoading(true);
     fetch(ENDPOINTS.genreList)
       .then(response => {
         if (!response.ok) {
@@ -35,18 +38,19 @@ const MovieFilter: React.FC<MovieFilterProps> = ({ onFilterChange }) => {
       })
       .then(data => {
         setGenres(data.genres);
+        setLoading(false);
       })
       .catch(err => {
-        console.error('Błąd pobierania gatunków:', err);
+        setError(err.message);
+        setLoading(false);
       });
-  }, []);
+  }, [setLoading, setError]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onFilterChange({ query, genre, minVoteAverage, sortBy });
     setOpen(false);
   };
-
   return (
     <Box>
       <Button

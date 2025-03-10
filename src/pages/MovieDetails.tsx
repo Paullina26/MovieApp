@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Container, Typography, Box, Button } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
-import Loading from '../components/status/Loading';
-import ErrorAlert from '../components/status/ErrorAlert';
 import { MovieDetails as MovieDetailsType } from '../types';
 import { API_KEY } from '../api/api';
+import { useStatus } from '../context/StatusContext';
 
 const MovieDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [movie, setMovie] = useState<MovieDetailsType | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>('');
+  const { setLoading, setError } = useStatus();
 
   const getErrorMessage = (error: unknown): string =>
     error instanceof Error ? error.message : 'Nieznany błąd';
@@ -37,11 +35,7 @@ const MovieDetails: React.FC = () => {
     };
 
     fetchMovieDetails();
-  }, [id]);
-
-  if (loading) return <Loading />;
-  if (error) return <ErrorAlert message={error} />;
-  if (!movie) return null;
+  }, [id, setLoading, setError]);
 
   return (
     <Container sx={{ mt: 2, mb: 4, position: 'relative' }}>
@@ -52,7 +46,7 @@ const MovieDetails: React.FC = () => {
           borderRadius: 2,
           overflow: 'hidden',
           mb: 2,
-          backgroundImage: `url(https://image.tmdb.org/t/p/w780${movie.backdrop_path})`,
+          backgroundImage: `url(https://image.tmdb.org/t/p/w780${movie?.backdrop_path})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -79,8 +73,8 @@ const MovieDetails: React.FC = () => {
         >
           <Box
             component='img'
-            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-            alt={movie.title}
+            src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`}
+            alt={movie?.title ?? 'img'}
             sx={{
               width: 200,
               borderRadius: 2,
@@ -93,28 +87,28 @@ const MovieDetails: React.FC = () => {
           />
           <Box>
             <Typography sx={{ m: 0, pb: 1 }} variant='h5' gutterBottom>
-              {movie.title}
+              {movie?.title ?? ''}
             </Typography>
             <Typography sx={{ m: 0, pb: 0 }} variant='subtitle1' gutterBottom>
-              <b>Data premiery:</b> {movie.release_date} | <b>Czas trwania:</b>{' '}
-              {movie.runtime} min
+              <b>Data premiery:</b> {movie?.release_date ?? ''} |{' '}
+              <b>Czas trwania:</b> {movie?.runtime ?? ''} min
             </Typography>
             <Typography sx={{ m: 0, pb: 0 }} variant='body1' gutterBottom>
-              <b>Gatunki:</b> {movie.genres.map(g => g.name).join(', ')}
+              <b>Gatunki:</b> {movie?.genres.map(g => g.name).join(', ') ?? ''}
             </Typography>
             <Typography sx={{ m: 0, pb: 1 }} variant='body1' gutterBottom>
-              <b>Ocena:</b> {movie.vote_average}
+              <b>Ocena:</b> {movie?.vote_average ?? ''}
             </Typography>
             <Typography sx={{ m: 0, pb: 1 }} variant='body2'>
-              {movie.overview}
+              {movie?.overview ?? ' '}
             </Typography>
             <Typography sx={{ m: 0, pb: 0 }} gutterBottom>
               <b> Produkcja:</b>
             </Typography>
             <Typography variant='body2' gutterBottom>
-              {movie.production_companies
+              {movie?.production_companies
                 .map(company => company.name)
-                .join(', ')}
+                .join(', ') ?? ''}
             </Typography>
           </Box>
         </Box>
