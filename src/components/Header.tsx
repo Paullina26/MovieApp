@@ -37,9 +37,3 @@ const Header: React.FC<HeaderProps> = ({ onFilterChange }) => (
 );
 
 export default Header;
-
-{
-  /* <Box sx={{ mt: '80px' }}>
-<MovieFilter onFilterChange={handleFilterChange} />
-</Box> */
-}
